@@ -8,7 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 // import { useSelector } from "react-redux";
 import { Formik, Form } from "formik";
 import { TextField } from "@mui/material";
-// import LoadingButton from "@mui/lab/LoadingButton";
+import LoadingButton from "@mui/lab/LoadingButton";
 import * as yup from "yup";
 const loginSchema = yup.object().shape({
   email: yup
@@ -110,16 +110,14 @@ const Login = () => {
                     error={touched.password && Boolean(errors.password)}
                     helperText={touched.password && errors.password}
                   />
-
-                  <button type="submit">Submit</button>
-                  {/* <LoadingButton
+                  <LoadingButton
                     type="submit"
                     // loading={loading}
                     loadingPosition="center"
                     variant="contained"
                   >
                     Submit
-                  </LoadingButton> */}
+                  </LoadingButton>
                 </Box>
               </Form>
             )}

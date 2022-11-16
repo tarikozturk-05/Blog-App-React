@@ -118,6 +118,13 @@ const Login = () => {
                   >
                     Submit
                   </LoadingButton>
+                  <LoadingButton
+                  sx={{backgroundColor:"pink"}}
+                    loadingPosition="center"
+                    variant="contained"
+                  >
+                    Login With Google
+                  </LoadingButton>
                 </Box>
               </Form>
             )}

@@ -10,7 +10,8 @@ import { Formik, Form } from "formik";
 import { TextField } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 import * as yup from "yup";
-import { signUpWithGoogle } from "../helper/firebase";
+import { createUser, signUpWithGoogle } from "../helper/firebase";
+import { useState } from "react";
 const loginSchema = yup.object().shape({
   email: yup
     .string()
@@ -18,13 +19,13 @@ const loginSchema = yup.object().shape({
     .required("Please  enter an email"),
   password: yup
     .string()
-    .required("Please enter a password ")
-    .min(8, "Password must have min 8 chars")
-    .max(16, "Password must have max 16 chars")
-    .matches(/\d+/, "Password must have a number")
-    .matches(/[a-z]+/, "Password must have a lowercase")
-    .matches(/[A-Z]+/, "Password must have an uppercase")
-    .matches(/[!,?{}><%&$#£+-.]+/, " Password must have a special char"),
+    .required("Please enter a password "),
+    // .min(8, "Password must have min 8 chars")
+    // .max(16, "Password must have max 16 chars")
+    // .matches(/\d+/, "Password must have a number")
+    // .matches(/[a-z]+/, "Password must have a lowercase")
+    // .matches(/[A-Z]+/, "Password must have an uppercase")
+    // .matches(/[!,?{}><%&$#£+-.]+/, " Password must have a special char"),
 });
 const Register = () => {
   const navigate = useNavigate();
@@ -35,7 +36,28 @@ const Register = () => {
 const handleGoogle=()=>{
   signUpWithGoogle(navigate)
 }
+const initialInfo={
+  username:"",
+  email:"",
+  password:""
+}
 
+const [userInfo, setUserInfo] = useState(initialInfo)
+
+const handleChangeInfo=(e)=>{
+  e.preventDefault();
+  // const name=e.target.name;
+  // const value=e.target.value; 
+  const {name,value}=e.target;
+  setUserInfo({...userInfo,[name]:value})
+  console.log(userInfo)
+}
+const firebaseGonder=()=>{
+ 
+  createUser(userInfo.email , userInfo.password , navigate , userInfo.username)
+  
+
+}
   
   return (
     <Container maxWidth="lg">
@@ -77,7 +99,7 @@ const handleGoogle=()=>{
             Register
           </Typography>
           <Formik
-            initialValues={{ email: "", password: "" }}
+            initialValues={userInfo}
             validationSchema={loginSchema}
             onSubmit={(values, actions) => {
               //!login(values)
@@ -101,8 +123,8 @@ const handleGoogle=()=>{
                     id="username"
                     type="text"
                     variant="outlined"
-                    // value={values.username}
-                    // onChange={handleChange}
+                    value={userInfo.username}
+                    onChange={handleChangeInfo}
                     onBlur={handleBlur}
                     error={touched.username && Boolean(errors.username)}
                     helperText={touched.username && errors.username}
@@ -113,8 +135,8 @@ const handleGoogle=()=>{
                     id="email"
                     type="email"
                     variant="outlined"
-                    value={values.email}
-                    onChange={handleChange}
+                    value={userInfo.email}
+                    onChange={handleChangeInfo}
                     onBlur={handleBlur}
                     error={touched.email && Boolean(errors.email)}
                     helperText={touched.email && errors.email}
@@ -125,8 +147,8 @@ const handleGoogle=()=>{
                     id="password"
                     type="password"
                     variant="outlined"
-                    value={values.password}
-                    onChange={handleChange}
+                    value={userInfo.password}
+                    onChange={handleChangeInfo}
                     onBlur={handleBlur}
                     error={touched.password && Boolean(errors.password)}
                     helperText={touched.password && errors.password}
@@ -137,6 +159,7 @@ const handleGoogle=()=>{
                     // loading={loading}
                     loadingPosition="center"
                     variant="contained"
+                    onClick={firebaseGonder}
                   >
                     Register
                   </LoadingButton>

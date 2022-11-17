@@ -10,9 +10,11 @@ const [currentUser, setCurrentUser] = useState(true)
 console.log(currentUser)
 useEffect(() => {
   userObserver(setCurrentUser);
-
+console.log(currentUser)
   
 }, [])
+console.log(currentUser)
+
   return (
     <div>
      <AuthContext.Provider value={{currentUser}}>

@@ -37,7 +37,7 @@ const handleGoogle=()=>{
   signUpWithGoogle(navigate)
 }
 const initialInfo={
-  username:"",
+  displayName:"",
   email:"",
   password:""
 }
@@ -53,9 +53,9 @@ const handleChangeInfo=(e)=>{
   console.log(userInfo)
 }
 const firebaseGonder=()=>{
- 
-  createUser(userInfo.email , userInfo.password , navigate , userInfo.username)
-  
+  // const displayName = `${firstName} ${lastName}`;
+  createUser(userInfo.email , userInfo.password , navigate , userInfo.displayName)
+
 
 }
   
@@ -118,16 +118,16 @@ const firebaseGonder=()=>{
               <Form>
                 <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
                 <TextField
-                    label="UserName"
-                    name="username"
-                    id="username"
+                    label="displayName"
+                    name="displayName"
+                    id="displayName"
                     type="text"
                     variant="outlined"
-                    value={userInfo.username}
+                    value={userInfo.displayName}
                     onChange={handleChangeInfo}
                     onBlur={handleBlur}
-                    error={touched.username && Boolean(errors.username)}
-                    helperText={touched.username && errors.username}
+                    error={touched.displayName && Boolean(errors.displayName)}
+                    helperText={touched.displayName && errors.displayName}
                   />
                   <TextField
                     label="Email"

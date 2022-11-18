@@ -1,4 +1,4 @@
-import { Box, Button, TextareaAutosize } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { useContext, useState } from "react";
 import { AuthContext } from "../contexts/AuthContext";
@@ -21,6 +21,7 @@ const NewBlog = () => {
     setNewblogInput({ ...value, [name]: value });
   };
   const handleSubmit = (e) => {
+    console.log("sasasa")
     e.preventDefault();
 
     AddUser(newblogInput);

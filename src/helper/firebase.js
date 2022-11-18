@@ -28,6 +28,7 @@ const firebaseConfig = {
   storageBucket: process.env.REACT_APP_storageBucket,
   messagingSenderId: process.env.REACT_APP_messagingSenderId,
   appId: process.env.REACT_APP_appId,
+  databaseURL: "https://blog-app-560cb-default-rtdb.firebaseio.com",
 };
 
 // Initialize Firebase
